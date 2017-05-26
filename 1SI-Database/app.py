@@ -32,5 +32,16 @@ def all_school():
     return render_template('all_school.html', asked_parameters=asked_parameters)
 
 
+@app.route('/mentors-by-country')
+def mentors_by_country():
+    query = ("""SELECT  schools.country, COUNT(mentors.first_name)
+            FROM mentors
+            INNER JOIN schools
+                ON mentors.city = schools.city
+            GROUP BY schools.country
+            ORDER BY schools.country""")
+    asked_parameters = database_manager(query)
+    return render_template('mentors_by_country.html', asked_parameters=asked_parameters)
+
 if __name__ == '__main__':
     app.run(debug=True)
