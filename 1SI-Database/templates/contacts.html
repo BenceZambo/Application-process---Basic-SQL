@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Contacts</title>
+    </head>
+    <body>
+        <h1>Contacts</h1>
+            <p> {% for parameters in asked_parameters %} </p>
+                    {% for information in parameters %}
+                        --{{information}}--
+                    {% endfor %}
+            {% endfor %}
+    </body>
+</html> 

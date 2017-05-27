@@ -43,5 +43,17 @@ def mentors_by_country():
     asked_parameters = database_manager(query)
     return render_template('mentors_by_country.html', asked_parameters=asked_parameters)
 
+
+@app.route('/contacts')
+def contacts():
+    query = ("""SELECT concat(mentors.first_name, ' ', mentors.last_name), schools.name
+            FROM mentors
+            INNER JOIN schools
+                ON mentors.city = schools.city
+            ORDER BY schools.name""")
+    asked_parameters = database_manager(query)
+    return render_template('contacts.html', asked_parameters=asked_parameters)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
