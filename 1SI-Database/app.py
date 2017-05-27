@@ -55,5 +55,29 @@ def contacts():
     return render_template('contacts.html', asked_parameters=asked_parameters)
 
 
+@app.route('/applicants')
+def applicants():
+    query = ("""SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date
+            FROM applicants
+            INNER JOIN applicants_mentors
+                ON applicants.id = applicants_mentors.applicant_id
+            WHERE applicants_mentors.creation_date  > '2016-01-01'
+            ORDER BY applicants_mentors.creation_date DESC""")
+    asked_parameters = database_manager(query)
+    return render_template('applicants.html', asked_parameters=asked_parameters)
+
+
+@app.route('/applicants-and-mentors')
+def applicants_and_mentors():
+    query = ("""SELECT applicants.first_name, applicants.application_code, mentors.first_name, mentors.last_name
+            FROM applicants
+            LEFT JOIN applicants_mentors
+                ON applicants.id = applicants_mentors.applicant_id
+            LEFT JOIN mentors
+                ON mentors.id = applicants_mentors.mentor_id""")
+    asked_parameters = database_manager(query)
+    return render_template('applicants_and_mentors.html', asked_parameters=asked_parameters)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

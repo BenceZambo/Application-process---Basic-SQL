@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>Applicants</title>
+    </head>
+    <body>
+        <h1>Applicants, who joined later than 2016</h1>
+            <p> {% for parameters in asked_parameters %} </p>
+                    {% for information in parameters %}
+                        --{{information}}--
+                    {% endfor %}
+            {% endfor %}
+    </body>
+</html> 
