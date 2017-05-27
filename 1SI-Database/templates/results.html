@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <p> {% for parameters in asked_parameters %} </p>
+            {% for information in parameters %}
+                --{{information}}--
+            {% endfor %}
+    {% endfor %}
+{% endblock %}

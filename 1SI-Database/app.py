@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    asked_parameters = []
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/mentors')
@@ -18,7 +19,7 @@ def mentors():
                 ON mentors.city = schools.city
             ORDER BY mentors.id""")
     asked_parameters = database_manager(query)
-    return render_template('mentors.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/all-school')
@@ -29,7 +30,7 @@ def all_school():
                 ON mentors.city = schools.city
             ORDER BY mentors.id""")
     asked_parameters = database_manager(query)
-    return render_template('all_school.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/mentors-by-country')
@@ -41,7 +42,7 @@ def mentors_by_country():
             GROUP BY schools.country
             ORDER BY schools.country""")
     asked_parameters = database_manager(query)
-    return render_template('mentors_by_country.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/contacts')
@@ -52,7 +53,7 @@ def contacts():
                 ON mentors.city = schools.city
             ORDER BY schools.name""")
     asked_parameters = database_manager(query)
-    return render_template('contacts.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/applicants')
@@ -64,7 +65,7 @@ def applicants():
             WHERE applicants_mentors.creation_date  > '2016-01-01'
             ORDER BY applicants_mentors.creation_date DESC""")
     asked_parameters = database_manager(query)
-    return render_template('applicants.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 @app.route('/applicants-and-mentors')
@@ -76,7 +77,7 @@ def applicants_and_mentors():
             LEFT JOIN mentors
                 ON mentors.id = applicants_mentors.mentor_id""")
     asked_parameters = database_manager(query)
-    return render_template('applicants_and_mentors.html', asked_parameters=asked_parameters)
+    return render_template('results.html', asked_parameters=asked_parameters)
 
 
 if __name__ == '__main__':
